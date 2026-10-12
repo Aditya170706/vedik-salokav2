@@ -22,7 +22,3 @@ Thumbs.db
 *.env
 hf_token.txt
 secrets.py
-database/knowledge_graph/graph.json
-database/search_index/documents.json
-database/search_index/inverted_index.json
-data/annotated/itihasa_ramayana_mahabharata.json

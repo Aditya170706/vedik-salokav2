@@ -1,0 +1,4 @@
+database/knowledge_graph/graph.json filter=lfs diff=lfs merge=lfs -text
+data/annotated/itihasa_ramayana_mahabharata.json filter=lfs diff=lfs merge=lfs -text
+database/search_index/documents.json filter=lfs diff=lfs merge=lfs -text
+database/search_index/inverted_index.json filter=lfs diff=lfs merge=lfs -text
