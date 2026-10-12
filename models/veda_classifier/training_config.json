@@ -1,6 +1,6 @@
 {
   "task": "veda",
-  "version": "v20260608_095509",
+  "version": "v20261002_035645",
   "pretrained": "ai4bharat/indic-bert",
   "num_labels": 6,
   "classes": [
@@ -12,12 +12,12 @@
     "Yajurveda"
   ],
   "epochs": 5,
-  "batch_size": 8,
+  "batch_size": 16,
   "learning_rate": 2e-05,
   "weight_decay": 0.01,
   "warmup_ratio": 0.1,
   "seed": 42,
-  "train_size": 31,
-  "val_size": 7,
-  "elapsed_sec": 90.6
+  "train_size": 24768,
+  "val_size": 5304,
+  "elapsed_sec": 2417.9
 }

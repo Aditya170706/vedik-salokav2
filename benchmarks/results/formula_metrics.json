@@ -1,0 +1,476 @@
+{
+  "config": {
+    "n_items": 21,
+    "expr_convention": "expected.expr is the canonical SymPy expression for the quantity (e.g. a**2, pi*r**2). Symbolic equivalence to the system's returned expression is tested with sympy.simplify(retrieved - expected) == 0. Relational statements (Pythagoras) are written in equal-to-zero form."
+  },
+  "stage1_detection": {
+    "metrics": {
+      "n": 21,
+      "tp": 8,
+      "fp": 1,
+      "tn": 4,
+      "fn": 8,
+      "accuracy": 0.5714,
+      "precision": 0.8889,
+      "recall": 0.5,
+      "f1": 0.64
+    },
+    "per_item": [
+      {
+        "id": "F01",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F02",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F03",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.6,
+        "triggers": [
+          "Numeric content detected"
+        ]
+      },
+      {
+        "id": "F04",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F05",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F06",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'वर्ग'"
+        ]
+      },
+      {
+        "id": "F07",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F08",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F09",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'क्षेत्र'"
+        ]
+      },
+      {
+        "id": "F10",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'क्षेत्र'"
+        ]
+      },
+      {
+        "id": "F11",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'क्षेत्र'"
+        ]
+      },
+      {
+        "id": "F12",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'क्षेत्र'"
+        ]
+      },
+      {
+        "id": "F13",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'वर्ग'"
+        ]
+      },
+      {
+        "id": "F14",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F15",
+        "gold": true,
+        "pred": false,
+        "correct": false,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "F16",
+        "gold": true,
+        "pred": true,
+        "correct": true,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'संख्या'"
+        ]
+      },
+      {
+        "id": "N01",
+        "gold": false,
+        "pred": false,
+        "correct": true,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "N02",
+        "gold": false,
+        "pred": false,
+        "correct": true,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "N03",
+        "gold": false,
+        "pred": false,
+        "correct": true,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "N04",
+        "gold": false,
+        "pred": false,
+        "correct": true,
+        "detector_confidence": 0.0,
+        "triggers": []
+      },
+      {
+        "id": "N05",
+        "gold": false,
+        "pred": true,
+        "correct": false,
+        "detector_confidence": 0.7,
+        "triggers": [
+          "Devanagari math keyword: 'क्षेत्र'"
+        ]
+      }
+    ]
+  },
+  "stage2_5_formula": {
+    "metrics": {
+      "n_formula_items": 15,
+      "retrieval": {
+        "scored": 15,
+        "retrieved": 10,
+        "rate": 0.6667
+      },
+      "extraction": {
+        "scored": 9,
+        "correct": 1,
+        "accuracy": 0.1111
+      },
+      "symbolic": {
+        "scored": 13,
+        "parse_valid": 13,
+        "parse_valid_rate": 1.0,
+        "equivalent": 1,
+        "equivalent_rate": 0.0769
+      },
+      "interpretation": {
+        "scored": 15,
+        "correct": 1,
+        "accuracy": 0.0667
+      }
+    },
+    "per_item": [
+      {
+        "id": "F01",
+        "path": "generated",
+        "expected_key": "pythagorean",
+        "expected_system_key": "pythagorean",
+        "retrieved_key": null,
+        "retrieval_success": false,
+        "extraction_correct": false,
+        "chosen_expr": "x + y",
+        "expected_expr": "a**2 + b**2 - c**2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "",
+        "expected_name": "Pythagorean theorem",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F02",
+        "path": "registry",
+        "expected_key": "square_diagonal_double_area",
+        "expected_system_key": null,
+        "retrieved_key": "pythagorean",
+        "retrieval_success": true,
+        "extraction_correct": null,
+        "chosen_expr": "a**2 + b**2 - c**2",
+        "expected_expr": "2*a**2 - c**2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Pythagorean theorem",
+        "expected_name": "Square-diagonal relation",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F03",
+        "path": "generated",
+        "expected_key": "pythagorean_triples",
+        "expected_system_key": null,
+        "retrieved_key": null,
+        "retrieval_success": false,
+        "extraction_correct": null,
+        "chosen_expr": "x + y",
+        "expected_expr": null,
+        "parse_valid": true,
+        "equivalent": null,
+        "chosen_name": "",
+        "expected_name": "Pythagorean triples",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F04",
+        "path": "registry",
+        "expected_key": "sqrt2_approximation",
+        "expected_system_key": null,
+        "retrieved_key": "pythagorean",
+        "retrieval_success": true,
+        "extraction_correct": null,
+        "chosen_expr": "a**2 + b**2 - c**2",
+        "expected_expr": "577/408",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Pythagorean theorem",
+        "expected_name": "Square-root-of-2 approximation",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F05",
+        "path": "registry",
+        "expected_key": "pi_approximation",
+        "expected_system_key": null,
+        "retrieved_key": "circle_area",
+        "retrieval_success": true,
+        "extraction_correct": null,
+        "chosen_expr": "pi * r**2",
+        "expected_expr": null,
+        "parse_valid": true,
+        "equivalent": null,
+        "chosen_name": "Area of circle",
+        "expected_name": "Pi approximation (circle-square transformation)",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F06",
+        "path": "registry",
+        "expected_key": "triangle_area",
+        "expected_system_key": "triangle_area",
+        "retrieved_key": "pythagorean",
+        "retrieval_success": true,
+        "extraction_correct": false,
+        "chosen_expr": "a**2 + b**2 - c**2",
+        "expected_expr": "b*h/2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Pythagorean theorem",
+        "expected_name": "Area of triangle",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F07",
+        "path": "registry",
+        "expected_key": "circle_area",
+        "expected_system_key": "circle_area",
+        "retrieved_key": "circle_area",
+        "retrieval_success": true,
+        "extraction_correct": true,
+        "chosen_expr": "pi * r**2",
+        "expected_expr": "pi*r**2",
+        "parse_valid": true,
+        "equivalent": true,
+        "chosen_name": "Area of circle",
+        "expected_name": "Area of circle",
+        "interpretation_correct": true
+      },
+      {
+        "id": "F08",
+        "path": "generated",
+        "expected_key": "arithmetic_sum",
+        "expected_system_key": "arithmetic_sum",
+        "retrieved_key": null,
+        "retrieval_success": false,
+        "extraction_correct": false,
+        "chosen_expr": "a + b",
+        "expected_expr": "n*(a + l)/2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "",
+        "expected_name": "Arithmetic series sum",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F09",
+        "path": "registry",
+        "expected_key": "square_area",
+        "expected_system_key": "square_area",
+        "retrieved_key": "pythagorean",
+        "retrieval_success": true,
+        "extraction_correct": false,
+        "chosen_expr": "a**2 + b**2 - c**2",
+        "expected_expr": "a**2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Pythagorean theorem",
+        "expected_name": "Area of square",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F10",
+        "path": "registry",
+        "expected_key": "rectangle_area",
+        "expected_system_key": null,
+        "retrieved_key": "pythagorean",
+        "retrieval_success": true,
+        "extraction_correct": null,
+        "chosen_expr": "a**2 + b**2 - c**2",
+        "expected_expr": "l*b",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Pythagorean theorem",
+        "expected_name": "Area of rectangle",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F11",
+        "path": "registry",
+        "expected_key": "triangle_area",
+        "expected_system_key": "triangle_area",
+        "retrieved_key": "pythagorean",
+        "retrieval_success": true,
+        "extraction_correct": false,
+        "chosen_expr": "a**2 + b**2 - c**2",
+        "expected_expr": "b*h/2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Pythagorean theorem",
+        "expected_name": "Area of triangle",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F12",
+        "path": "registry",
+        "expected_key": "circle_area",
+        "expected_system_key": "circle_area",
+        "retrieved_key": "triangle_area",
+        "retrieval_success": true,
+        "extraction_correct": false,
+        "chosen_expr": "(b * h) / 2",
+        "expected_expr": "pi*r**2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Area of triangle",
+        "expected_name": "Area of circle",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F13",
+        "path": "registry",
+        "expected_key": "sphere_surface",
+        "expected_system_key": null,
+        "retrieved_key": "circle_area",
+        "retrieval_success": true,
+        "extraction_correct": null,
+        "chosen_expr": "pi * r**2",
+        "expected_expr": "4*pi*r**2",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "Area of circle",
+        "expected_name": "Surface area of sphere",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F14",
+        "path": "generated",
+        "expected_key": "quadratic",
+        "expected_system_key": "quadratic",
+        "retrieved_key": null,
+        "retrieval_success": false,
+        "extraction_correct": false,
+        "chosen_expr": "x + y",
+        "expected_expr": "(-b + sqrt(b**2 - 4*a*c)) / (2*a)",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "",
+        "expected_name": "Quadratic formula",
+        "interpretation_correct": false
+      },
+      {
+        "id": "F15",
+        "path": "generated",
+        "expected_key": "vedic_square",
+        "expected_system_key": "vedic_square",
+        "retrieved_key": null,
+        "retrieval_success": false,
+        "extraction_correct": false,
+        "chosen_expr": "x + y",
+        "expected_expr": "(a + b)**2 - 2*a*b",
+        "parse_valid": true,
+        "equivalent": false,
+        "chosen_name": "",
+        "expected_name": "Vedic square identity",
+        "interpretation_correct": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "version": "1.0",
+  "created": "2026-10-09",
+  "collection": "sample48",
+  "collection_description": "The 48 annotated shlokas from the five sample sources used to build the shipped vector index (atharvaveda_sample, rigveda_mandala1, rigveda_mandala2, sulbasutras_sample, vedic_mathematics_sutras). All retrieval methods are scored on this identical collection.",
+  "judgment_protocol": "Relevance judgements are AI-generated candidates (judged_by=ai_candidate) and MUST be confirmed by a human reviewer before publication. A passage is relevant if a Sanskrit-literate reader would judge it a correct answer to the query, independent of surface token overlap.",
+  "labels": {
+    "lexical": "surface form / exact-phrase query",
+    "conceptual": "meaning-based query; wording differs from every relevant passage",
+    "cross-lingual": "English query targeting Sanskrit passages",
+    "keyword-field": "query expressed in the annotation keyword vocabulary",
+    "negative": "no passage in the collection is a correct answer (precision-only)"
+  },
+  "queries": [
+    {
+      "id": "Q01", "query": "क्षेत्रफलं", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250749", "SHLOKA_250750", "SHLOKA_250751", "SHLOKA_250752"],
+      "partially_relevant_ids": [],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "All four passages define the area (क्षेत्रफल) of a figure."
+    },
+    {
+      "id": "Q02", "query": "वृत्तस्य क्षेत्रफलं", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250752"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "States the area of a circle."
+    },
+    {
+      "id": "Q03", "query": "त्रिभुजस्य क्षेत्रफलं", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250751"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "States the area of a triangle."
+    },
+    {
+      "id": "Q04", "query": "भुजवर्गः", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250749"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "The square of the side — the square-area statement."
+    },
+    {
+      "id": "Q05", "query": "गोलस्य पृष्ठफलं", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250753"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Surface area of a sphere."
+    },
+    {
+      "id": "Q06", "query": "एकाधिकेन पूर्वेण", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250754"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Exact sutra name (Ekadhikena Purvena)."
+    },
+    {
+      "id": "Q07", "query": "निखिलं नवतश्चरमं दशतः", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250756"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Exact sutra text (Nikhilam)."
+    },
+    {
+      "id": "Q08", "query": "ऊर्ध्वतिर्यग्भ्याम्", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250758"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Exact sutra text (Urdhva-tiryagbhyam)."
+    },
+    {
+      "id": "Q09", "query": "शून्यं साम्यसमुच्चये", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250762"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Exact sutra text (Sunyam Samyasamuccaye)."
+    },
+    {
+      "id": "Q10", "query": "भागसूत्रम्", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250761"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Division sutra."
+    },
+    {
+      "id": "Q11", "query": "अनुपातसूत्रम्", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250765"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Proportion sutra."
+    },
+    {
+      "id": "Q12", "query": "अग्निमीळे पुरोहितं", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250517"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Opening of the Agni hymn, Rigveda 1.1."
+    },
+    {
+      "id": "Q13", "query": "इन्द्रं वाणीरनूषत", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_250528"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Indra hymn line."
+    },
+    {
+      "id": "Q14", "query": "ज्योतिषां ज्योतिः", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_002266"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Light of lights — astronomy passage."
+    },
+    {
+      "id": "Q15", "query": "सूर्यो ग्रहाणां राजा", "language": "sa", "category": "lexical",
+      "relevant_ids": ["SHLOKA_002267"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "The sun is king of the planets."
+    },
+    {
+      "id": "Q16", "query": "The area of a square is the square of its side", "language": "en", "category": "cross-lingual",
+      "relevant_ids": ["SHLOKA_250749"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "English paraphrase of the square-area sutra."
+    },
+    {
+      "id": "Q17", "query": "the area of a circle equals pi times the square of the radius", "language": "en", "category": "cross-lingual",
+      "relevant_ids": ["SHLOKA_250752"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "English paraphrase of the circle-area sutra."
+    },
+    {
+      "id": "Q18", "query": "the area of a triangle is half the base multiplied by the height", "language": "en", "category": "cross-lingual",
+      "relevant_ids": ["SHLOKA_250751"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "English paraphrase of the triangle-area sutra."
+    },
+    {
+      "id": "Q19", "query": "the area of a rectangle is its length multiplied by its breadth", "language": "en", "category": "cross-lingual",
+      "relevant_ids": ["SHLOKA_250750"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "English paraphrase of the rectangle-area sutra."
+    },
+    {
+      "id": "Q20", "query": "surface area of a sphere", "language": "en", "category": "cross-lingual",
+      "relevant_ids": ["SHLOKA_250753"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "English paraphrase of the sphere surface-area sutra."
+    },
+    {
+      "id": "Q21", "query": "सूत्रम्", "language": "sa", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_250755", "SHLOKA_250757", "SHLOKA_250759", "SHLOKA_250761", "SHLOKA_250763", "SHLOKA_250765", "SHLOKA_250767", "SHLOKA_250769", "SHLOKA_250771", "SHLOKA_250773"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Every passage that names or closes a sutra. Only SHLOKA_250755 contains सूत्रम् as an isolated token, so token-level keyword search fails here by construction."
+    },
+    {
+      "id": "Q22", "query": "the nine planets revolve around the sun", "language": "en", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_002270"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "English paraphrase of the nine-planets passage."
+    },
+    {
+      "id": "Q23", "query": "चन्द्रमा नक्षत्राणां पतिः", "language": "sa", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_002268"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "The moon is lord of the stars."
+    },
+    {
+      "id": "Q24", "query": "नक्षत्राणि सप्तविंशतिः", "language": "sa", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_002272"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Twenty-seven constellations circle the moon."
+    },
+    {
+      "id": "Q25", "query": "the science of astronomy among the Vedas", "language": "en", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_002266", "SHLOKA_002271"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Both passages are explicitly about jyotisha (astronomy)."
+    },
+    {
+      "id": "Q26", "query": "hymns praising Agni, the priest of the sacrifice", "language": "en", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_250517", "SHLOKA_250519", "SHLOKA_250521", "SHLOKA_250523", "SHLOKA_250525"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "The Agni-hymn lines invoking Agni as priest (hotṛ)."
+    },
+    {
+      "id": "Q27", "query": "verses praising Indra the thunderbolt-bearer", "language": "en", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_250527", "SHLOKA_250528", "SHLOKA_250529", "SHLOKA_250530", "SHLOKA_250531", "SHLOKA_250532"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Indra-hymn lines; SHLOKA_250530 names the vajra (thunderbolt)."
+    },
+    {
+      "id": "Q28", "query": "mathematics arithmetic", "language": "en", "category": "keyword-field",
+      "relevant_ids": ["SHLOKA_002270", "SHLOKA_250749", "SHLOKA_250750", "SHLOKA_250751", "SHLOKA_250752", "SHLOKA_250753", "SHLOKA_250757", "SHLOKA_250762", "SHLOKA_250763"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Every collection document annotated with the keywords mathematics + arithmetic."
+    },
+    {
+      "id": "Q29", "query": "वर्ग", "language": "sa", "category": "conceptual",
+      "relevant_ids": ["SHLOKA_250749", "SHLOKA_250752", "SHLOKA_250753", "SHLOKA_250759"],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Passages using वर्ग (square) in a compound. All occurrences are bound (भुजवर्गः, व्यासार्धवर्गं, व्यासवर्गं, वर्गणासूत्रम्), so the token-level index cannot match them."
+    },
+    {
+      "id": "Q30", "query": "why is the sky blue", "language": "en", "category": "negative",
+      "relevant_ids": [],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Off-corpus query; no correct answer exists. Recall/MRR are undefined; only precision is meaningful."
+    },
+    {
+      "id": "Q31", "query": "how to perform the soma sacrifice", "language": "en", "category": "negative",
+      "relevant_ids": [],
+      "judged_by": "ai_candidate", "needs_reviewer": true,
+      "rationale": "Procedural query absent from the collection. Precision-only."
+    }
+  ]
+}

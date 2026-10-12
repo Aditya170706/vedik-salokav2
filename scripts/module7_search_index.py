@@ -164,10 +164,11 @@ class LocalSearchIndex:
         tokens = self._tokenize(combined)
 
         for token in set(tokens):
-            if token not in self._inverted:
-                self._inverted[token] = []
-            if did not in self._inverted[token]:
-                self._inverted[token].append(did)
+            # Each doc id is appended at most once per token: `set(tokens)`
+            # removes within-doc repeats and each doc is indexed once. The
+            # previous `did not in list` check was O(posting-list length),
+            # making a full-corpus build quadratic.
+            self._inverted.setdefault(token, []).append(did)
 
     def bulk_index(self, docs: list[dict]) -> int:
         for doc in docs:

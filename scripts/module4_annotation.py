@@ -40,6 +40,70 @@ BRANCH_OPTIONS = [
 
 LANGUAGE_OPTIONS = ["Sanskrit", "Prakrit", "Mixed", "Unknown"]
 
+# ---------------------------------------------------------------------------
+# Keyword lexicon for heuristic domain classification
+#
+# "strong" terms are domain-specific and score 3 each; "weak" terms are common
+# in ordinary narrative Sanskrit (e.g. धर्म, कर्म) and score 1 each. A verse is
+# labelled only when its best domain reaches SCORE_THRESHOLD, so a single
+# generic word can no longer mislabel an epic verse as Philosophy.
+# ---------------------------------------------------------------------------
+
+SCORE_STRONG = 3
+SCORE_WEAK = 1
+SCORE_THRESHOLD = 3
+
+DOMAIN_LEXICON = {
+    "Mathematics": {
+        "branch": "Arithmetic",
+        "strong": [
+            "गणित", "गणना", "संख्यान", "संख्या", "क्षेत्रफल", "बीजगणित",
+            "रेखागणित", "त्रैराशिक", "समीकरण", "श्रेणी", "पूर्णांक", "भिन्न",
+            "वर्गमूल", "घनमूल", "समकोण", "त्रिभुज", "चतुर्भुज", "वृत्त",
+            "परिधि", "व्यास", "त्रिज्या", "ज्या", "कोटिज्या", "कोण",
+            "शून्य", "मापन",
+            "ganita", "sankhya", "kshetra", "bijaganita", "rekha",
+            "samikarana", "trijya", "vyasa", "paridhi", "shunya",
+        ],
+        "weak": ["वर्ग", "घन", "अंक", "योग", "मान", "राशि", "परिमाण", "प्रमाण", "varga", "ghana", "kona"],
+    },
+    "Astronomy": {
+        "branch": "Jyotisha",
+        "strong": [
+            "ज्योतिष", "नक्षत्र", "ग्रहण", "संक्रांति", "राशिचक्र", "खगोल",
+            "गोल", "यन्त्र", "क्रांति", "अयन", "दृक्प", "भास्कर", "वेध",
+            "jyotisha", "nakshatra", "grahana", "samkranti", "khagola",
+            "yantra", "kranti", "ayana", "bhaskara",
+        ],
+        "weak": ["ग्रह", "चन्द्र", "सूर्य", "तारा", "रवि", "मास", "छाया", "अर्क", "उदय", "अस्त", "पात", "तिथि", "मण्डल", "graha", "chandra", "surya"],
+    },
+    "Grammar": {
+        "branch": "Vyakarana",
+        "strong": [
+            "व्याकरण", "प्रत्यय", "विभक्ति", "संधि", "समास", "कारक",
+            "कृदंत", "तद्धित", "उपसर्ग", "अव्यय", "सर्वनाम", "लकार",
+            "वाच्य", "अष्टाध्यायी", "पाणिनि", "निरुक्त", "शिक्षा", "छन्दस्",
+            "vyakarana", "pratyaya", "vibhakti", "samasa", "karaka",
+            "panini", "ashtadhyayi", "nirukta",
+        ],
+        "weak": ["सूत्र", "वर्ण", "स्वर", "व्यंजन", "लिङ्ग", "वचन", "छन्द", "धातु", "पद", "sutra", "dhatu"],
+    },
+    "Philosophy": {
+        "branch": "Vedanta",
+        "strong": [
+            "ब्रह्म", "परमात्मन्", "आत्मन्", "मोक्ष", "अद्वैत", "द्वैत",
+            "वेदान्त", "उपनिषद्", "उपनिषद", "माया", "पुरुषार्थ", "संसार",
+            "सांख्य", "समाधि", "तत्त्व", "ईश्वर", "परमेश्वर", "जीव",
+            "मुक्ति", "निर्वाण", "दर्शन", "न्याय", "वैशेषिक", "मीमांसा",
+            "अविद्या", "आत्मा", "निर्वाण",
+            "brahma", "atman", "moksha", "advaita", "vedanta", "upanishad",
+            "maya", "purushartha", "samkhya", "tattva", "ishvara", "mukti",
+            "nirvana", "darshana",
+        ],
+        "weak": ["धर्म", "कर्म", "ज्ञान", "योग", "ध्यान", "अध्यात्म", "प्रकृति", "जीव", "dharma", "karma", "jnana"],
+    },
+}
+
 
 def _validate_annotation(annotation: dict) -> list[str]:
     """
@@ -107,37 +171,23 @@ def ai_annotate_shloka(shloka: dict) -> dict:
     else:
         annotation["veda"] = "Unknown"
 
-    # --- Domain detection (keyword matching in Devanagari + transliteration) ---
-    math_keywords = [
-        "गणित", "संख्या", "क्षेत्र", "कोण", "वर्ग", "घन",
-        "ganita", "sankhya", "kshetra", "kona", "varga", "ghana"
-    ]
-    astro_keywords = [
-        "ज्योतिष", "ग्रह", "नक्षत्र", "चन्द्र", "सूर्य",
-        "jyotisha", "graha", "nakshatra", "chandra", "surya"
-    ]
-    grammar_keywords = [
-        "व्याकरण", "धातु", "सूत्र", "पाणिनि",
-        "vyakarana", "dhatu", "sutra", "panini"
-    ]
-    philosophy_keywords = [
-        "ब्रह्म", "आत्म", "मोक्ष", "धर्म",
-        "brahma", "atma", "moksha", "dharma"
-    ]
-
+    # --- Domain detection (weighted keyword scoring, Devanagari + transliteration) ---
     text_lower = text.lower()
-    if any(kw in text for kw in math_keywords) or any(kw in text_lower for kw in math_keywords):
-        annotation["domain"] = "Mathematics"
-        annotation["branch"] = "Arithmetic"
-    elif any(kw in text for kw in astro_keywords) or any(kw in text_lower for kw in astro_keywords):
-        annotation["domain"] = "Astronomy"
-        annotation["branch"] = "Jyotisha"
-    elif any(kw in text for kw in grammar_keywords) or any(kw in text_lower for kw in grammar_keywords):
-        annotation["domain"] = "Grammar"
-        annotation["branch"] = "Vyakarana"
-    elif any(kw in text for kw in philosophy_keywords) or any(kw in text_lower for kw in philosophy_keywords):
-        annotation["domain"] = "Philosophy"
-        annotation["branch"] = "Vedanta"
+    scores = {}
+    for domain, spec in DOMAIN_LEXICON.items():
+        score = sum(SCORE_STRONG for kw in spec["strong"] if kw in text or kw in text_lower)
+        score += sum(SCORE_WEAK for kw in spec["weak"] if kw in text or kw in text_lower)
+        if score:
+            scores[domain] = score
+
+    if scores:
+        best_domain, best_score = max(scores.items(), key=lambda kv: kv[1])
+    else:
+        best_domain, best_score = "Unknown", 0
+
+    if best_score >= SCORE_THRESHOLD:
+        annotation["domain"] = best_domain
+        annotation["branch"] = DOMAIN_LEXICON[best_domain]["branch"]
     else:
         annotation["domain"] = "Unknown"
         annotation["branch"] = "Unknown"

@@ -1,6 +1,6 @@
 [
   {
-    "id": "SHLOKA_000001",
+    "id": "SHLOKA_002266",
     "text": "ज्योतिषां ज्योतिरजरं तदादित्यस्तपति।",
     "source": "atharvaveda_sample",
     "chapter": "",
@@ -17,36 +17,34 @@
         "jyotisha"
       ],
       "annotated_by": "ai_heuristic",
-      "annotated_at": "2026-06-08T09:52:35.294450Z",
+      "annotated_at": "2026-10-02T06:38:05.808935Z",
       "confidence": 0.6,
       "notes": ""
     }
   },
   {
-    "id": "SHLOKA_000002",
+    "id": "SHLOKA_002267",
     "text": "सूर्यो ग्रहाणां राजा।।",
     "source": "atharvaveda_sample",
     "chapter": "",
     "annotation": {
       "veda": "Atharvaveda",
-      "domain": "Astronomy",
-      "branch": "Jyotisha",
+      "domain": "Unknown",
+      "branch": "Unknown",
       "formula": "",
       "source": "atharvaveda_sample",
       "language": "Sanskrit",
       "keywords": [
-        "astronomy",
-        "atharvaveda",
-        "jyotisha"
+        "atharvaveda"
       ],
       "annotated_by": "ai_heuristic",
-      "annotated_at": "2026-06-08T09:52:35.294450Z",
+      "annotated_at": "2026-10-02T06:38:05.809938Z",
       "confidence": 0.6,
       "notes": ""
     }
   },
   {
-    "id": "SHLOKA_000003",
+    "id": "SHLOKA_002268",
     "text": "चन्द्रमा नक्षत्राणां पतिः शीतलप्रकाशः।",
     "source": "atharvaveda_sample",
     "chapter": "",
@@ -63,13 +61,13 @@
         "jyotisha"
       ],
       "annotated_by": "ai_heuristic",
-      "annotated_at": "2026-06-08T09:52:35.294450Z",
+      "annotated_at": "2026-10-02T06:38:05.809938Z",
       "confidence": 0.6,
       "notes": ""
     }
   },
   {
-    "id": "SHLOKA_000004",
+    "id": "SHLOKA_002269",
     "text": "रात्रौ प्रकाशयति।।",
     "source": "atharvaveda_sample",
     "chapter": "",
@@ -84,13 +82,13 @@
         "atharvaveda"
       ],
       "annotated_by": "ai_heuristic",
-      "annotated_at": "2026-06-08T09:52:35.294450Z",
+      "annotated_at": "2026-10-02T06:38:05.809938Z",
       "confidence": 0.6,
       "notes": ""
     }
   },
   {
-    "id": "SHLOKA_000005",
+    "id": "SHLOKA_002270",
     "text": "ग्रहाः नवसंख्याकाः सूर्यमण्डलं परिक्रामन्ति।",
     "source": "atharvaveda_sample",
     "chapter": "",
@@ -107,13 +105,13 @@
         "arithmetic"
       ],
       "annotated_by": "ai_heuristic",
-      "annotated_at": "2026-06-08T09:52:35.294450Z",
+      "annotated_at": "2026-10-02T06:38:05.809938Z",
       "confidence": 0.6,
       "notes": ""
     }
   },
   {
-    "id": "SHLOKA_000006",
+    "id": "SHLOKA_002271",
     "text": "ज्योतिष्यम्।।",
     "source": "atharvaveda_sample",
     "chapter": "",
@@ -130,13 +128,13 @@
         "jyotisha"
       ],
       "annotated_by": "ai_heuristic",
-      "annotated_at": "2026-06-08T09:52:35.294450Z",
+      "annotated_at": "2026-10-02T06:38:05.809938Z",
       "confidence": 0.6,
       "notes": ""
     }
   },
   {
-    "id": "SHLOKA_000007",
+    "id": "SHLOKA_002272",
     "text": "नक्षत्राणि सप्तविंशतिः चन्द्रमण्डलं परिक्रामन्ति।।",
     "source": "atharvaveda_sample",
     "chapter": "",
@@ -153,7 +151,7 @@
         "jyotisha"
       ],
       "annotated_by": "ai_heuristic",
-      "annotated_at": "2026-06-08T09:52:35.294450Z",
+      "annotated_at": "2026-10-02T06:38:05.809938Z",
       "confidence": 0.6,
       "notes": ""
     }

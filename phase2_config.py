@@ -19,10 +19,11 @@ BRANCH_MODEL_DIR = MODELS_DIR / "branch_classifier"
 VERSION_REGISTRY = MODELS_DIR / "version_registry.json"
 
 # ── Pretrained backbone ────────────────────────────────────────────────────
-# IndicBERT — multilingual model covering Sanskrit/Indic scripts
-# Falls back to multilingual-BERT if IndicBERT unavailable offline
+# Default backbone: multilingual BERT (works offline, no gated access needed).
+# Override with PRETRAINED_MODEL=ai4bharat/indic-bert to use the gated IndicBERT
+# (requires `hf auth login` with an account that has been granted access).
 PRETRAINED_MODEL_NAME = os.getenv(
-    "PRETRAINED_MODEL", "ai4bharat/indic-bert"
+    "PRETRAINED_MODEL", "google-bert/bert-base-multilingual-cased"
 )
 FALLBACK_MODEL_NAME = "google-bert/bert-base-multilingual-cased"
 

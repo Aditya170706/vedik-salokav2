@@ -25,7 +25,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.optim import AdamW
-from torch.cuda.amp import GradScaler, autocast
+from torch.amp import GradScaler, autocast
 from torch.utils.data import DataLoader
 from transformers import get_linear_schedule_with_warmup
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
@@ -124,7 +124,7 @@ def _eval_epoch(
         for batch in loader:
             batch = _batch_to_device(batch, device)
             labels = batch.pop("labels")
-            with autocast(enabled=use_amp):
+            with autocast(device.type, enabled=use_amp):
                 logits = model(**batch)
                 loss   = criterion(logits, labels)
             total_loss += loss.item()
@@ -176,7 +176,7 @@ def train_classifier(
     set_seed(seed)
     device  = get_device()
     use_amp = device.type == "cuda"
-    scaler  = GradScaler(enabled=use_amp)
+    scaler  = GradScaler(device.type, enabled=use_amp)
 
     model.to(device)
 
@@ -231,7 +231,7 @@ def train_classifier(
             labels = batch.pop("labels")
 
             optimizer.zero_grad()
-            with autocast(enabled=use_amp):
+            with autocast(device.type, enabled=use_amp):
                 logits = model(**batch)
                 loss   = criterion(logits, labels)
 

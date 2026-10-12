@@ -25,8 +25,8 @@
   "num_hidden_layers": 12,
   "num_memory_blocks": 0,
   "pad_token_id": 0,
-  "tie_word_embeddings": true,
-  "transformers_version": "5.4.0",
+  "position_embedding_type": "absolute",
+  "transformers_version": "4.57.6",
   "type_vocab_size": 2,
   "vocab_size": 200000
 }

@@ -227,7 +227,7 @@ class TestSegmentation:
         out = tmp_dir / "segmented.json"
         result_path = segment_file(sample_txt_file, source="Rigveda", output_path=out)
         assert result_path.exists()
-        with open(result_path) as f:
+        with open(result_path, encoding="utf-8") as f:
             shlokas = json.load(f)
         assert isinstance(shlokas, list)
         assert len(shlokas) >= 1
@@ -303,7 +303,7 @@ class TestAnnotation:
         out_path = tmp_dir / "annotated.json"
         annotate_file(seg_path, out_path, use_ai=True)
         assert out_path.exists()
-        with open(out_path) as f:
+        with open(out_path, encoding="utf-8") as f:
             annotated = json.load(f)
         assert len(annotated) == 1
         assert "annotation" in annotated[0]
@@ -523,7 +523,7 @@ class TestIntegration:
         segmented_dir.mkdir()
         seg_path = segment_file(cleaned_path, source="Rigveda", output_path=segmented_dir / "sample.json")
 
-        with open(seg_path) as f:
+        with open(seg_path, encoding="utf-8") as f:
             shlokas = json.load(f)
         assert len(shlokas) >= 1
 
@@ -532,7 +532,7 @@ class TestIntegration:
         annotated_dir.mkdir()
         ann_path = annotate_file(seg_path, annotated_dir / "sample.json", use_ai=True)
 
-        with open(ann_path) as f:
+        with open(ann_path, encoding="utf-8") as f:
             annotated = json.load(f)
         assert len(annotated) >= 1
         assert "annotation" in annotated[0]

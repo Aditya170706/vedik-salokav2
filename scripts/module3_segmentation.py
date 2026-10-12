@@ -25,9 +25,28 @@ audit = JSONLogger(LOGS_DIR / "segmentation_audit.jsonl")
 # Segmentation patterns
 # ---------------------------------------------------------------------------
 
-# Match a shloka unit ending with ।  or ॥
-# We split on these dandas while keeping them attached to the preceding chunk
-_RE_SPLIT = re.compile(r"([^।॥]+[।॥]+)")
+# Match a run of danda (।) / double-danda (॥) characters
+_RE_DANDA_RUN = re.compile(r"[।॥]+")
+
+
+def _split_on_dandas(text: str) -> list[str]:
+    """
+    Split text into shloka chunks, each ending with its danda run.
+
+    Implemented with `finditer` over danda runs (linear time) instead of a
+    backtracking pattern like `([^।॥]+[।॥]+)`. The latter degrades to O(n^2)
+    on text with no danda markers, which made segmentation of the Puranas and
+    Vedas corpora (0 dandas) hang for hours.
+    """
+    chunks = []
+    last = 0
+    for m in _RE_DANDA_RUN.finditer(text):
+        chunks.append(text[last:m.end()])
+        last = m.end()
+    # Keep any trailing text that has no terminating danda.
+    if last < len(text):
+        chunks.append(text[last:])
+    return chunks
 
 # Clean extra whitespace within a shloka
 _RE_INNER_WS = re.compile(r"[ \t]+")
@@ -101,13 +120,18 @@ def segment_text(
     """
     gen = id_generator or _global_id_gen
 
-    matches = _RE_SPLIT.findall(text)
-
-    # Fallback: if no danda markers found, split on double-newlines
-    if not matches:
+    # Fallback: text with no danda markers at all is split on blank lines.
+    # Checked up-front so we avoid the quadratic regex path entirely.
+    if _RE_DANDA_RUN.search(text) is None:
         logger.warning(f"No danda markers (। ॥) found in text for source '{source}'. "
                        "Falling back to paragraph splitting.")
         matches = [p.strip() for p in re.split(r"\n{2,}", text) if p.strip()]
+        # Sources with no blank-line structure (e.g. one verse per line) would
+        # otherwise collapse into a single giant chunk: fall back to lines.
+        if len(matches) <= 1:
+            matches = [line.strip() for line in text.splitlines() if line.strip()]
+    else:
+        matches = _split_on_dandas(text)
 
     shlokas = []
     for raw_chunk in matches:

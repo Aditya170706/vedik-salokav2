@@ -33,6 +33,13 @@ def setup_logger(name: str, log_dir: Path = None, level: str = "INFO") -> loggin
     )
 
     # Console handler
+    # Windows consoles default to a legacy code page (e.g. cp1252) that cannot
+    # encode Devanagari or symbols like '→', making every such log call emit a
+    # UnicodeEncodeError traceback. Reconfigure stdout to UTF-8 if possible.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
     ch = logging.StreamHandler(sys.stdout)
     ch.setFormatter(fmt)
     logger.addHandler(ch)

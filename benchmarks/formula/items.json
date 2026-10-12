@@ -1,0 +1,415 @@
+{
+  "version": "1.0",
+  "created": "2026-10-09",
+  "description": "Formula benchmark for the mathematical-extraction pipeline. Every item pairs (a) a source passage, (b) its verified mathematical interpretation and (c) the expected symbolic representation. Evaluation is split into five decoupled stages (see run_formula_eval.py): passage detection, formula retrieval, formula extraction, symbolic validity, interpretation correctness.",
+  "expr_convention": "expected.expr is the canonical SymPy expression for the quantity (e.g. a**2, pi*r**2). Symbolic equivalence to the system's returned expression is tested with sympy.simplify(retrieved - expected) == 0. Relational statements (Pythagoras) are written in equal-to-zero form.",
+  "provenance_levels": {
+    "verified_secondary": "Verse identity and translation checked against a reliable secondary source (edition/encyclopaedia) during this work; Devanagari follows the standard received text.",
+    "project_corpus": "Passage comes from this project's own annotated data; the mathematical interpretation is asserted by the benchmark author and is NOT externally sourced.",
+    "needs_review": "Provenance or interpretation not yet confirmed; must be checked by a domain reviewer before publication."
+  },
+  "items": [
+    {
+      "id": "F01",
+      "query_text": "दीर्घचतुरश्रस्याक्ष्णया रज्जुः पार्श्वमानी तिर्यग्मानी च यत्पृथग्भूते कुरुतस्तदुभयं करोति।",
+      "query_language": "sa",
+      "gloss": "The rope stretched along the diagonal of a rectangle makes (an area) equal to that made by its length and breadth separately.",
+      "source": {
+        "citation": "Baudhāyana Śulbasūtra 1.12 (BS 1.12)",
+        "url": "https://en.wikipedia.org/wiki/Baudhayana",
+        "license": "Public Domain (primary text, 1st millennium BCE)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "pythagorean",
+        "system_key": "pythagorean",
+        "expr": "a**2 + b**2 - c**2",
+        "latex": "a^2 + b^2 = c^2",
+        "variables": {"a": "length", "b": "breadth", "c": "diagonal"},
+        "name": "Pythagorean theorem",
+        "interpretation": "The square on the diagonal equals the sum of the squares on the two sides."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Devanagari matches the received verse quoted by Wikipedia/Baudhayana; translation via Sen & Bag (1983)."}
+    },
+    {
+      "id": "F02",
+      "query_text": "The diagonal of a square produces double the area of the square.",
+      "query_language": "en",
+      "gloss": "Diagonal-squared equals twice the side-squared for a square.",
+      "source": {
+        "citation": "Baudhāyana Śulbasūtra 1.9",
+        "url": "https://en.wikipedia.org/wiki/Shulba_Sutras",
+        "license": "Public Domain"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "square_diagonal_double_area",
+        "system_key": null,
+        "expr": "2*a**2 - c**2",
+        "latex": "c^2 = 2a^2",
+        "variables": {"a": "side", "c": "diagonal"},
+        "name": "Square-diagonal relation",
+        "interpretation": "In a square the square on the diagonal is twice the square on a side."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Translation from Wikipedia (Shulba Sutras), citing Sen & Bag 1983. The system has no registry entry for this relation."}
+    },
+    {
+      "id": "F03",
+      "query_text": "This is observed in rectangles having sides 3 and 4, 12 and 5, 15 and 8, 7 and 24, 12 and 35, 15 and 36.",
+      "query_language": "en",
+      "gloss": "List of Pythagorean triples used to set out right angles.",
+      "source": {
+        "citation": "Baudhāyana Śulbasūtra 1.13",
+        "url": "https://en.wikipedia.org/wiki/Shulba_Sutras",
+        "license": "Public Domain"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "pythagorean_triples",
+        "system_key": null,
+        "expr": null,
+        "latex": null,
+        "variables": {},
+        "name": "Pythagorean triples",
+        "interpretation": "Enumerates integer right-triangle side triples (a^2 + b^2 = c^2)."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Detection-only item: mathematical content with no single formula to extract."}
+    },
+    {
+      "id": "F04",
+      "query_text": "The measure is to be increased by its third and this again by its own fourth less the thirty-fourth part of that fourth; this is the value of the diagonal of a square whose side is the measure.",
+      "query_language": "en",
+      "gloss": "Rational approximation to sqrt(2): 1 + 1/3 + 1/(3*4) - 1/(3*4*34) = 577/408.",
+      "source": {
+        "citation": "Baudhāyana Śulbasūtra 2.12",
+        "url": "https://en.wikipedia.org/wiki/Shulba_Sutras",
+        "license": "Public Domain"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "sqrt2_approximation",
+        "system_key": null,
+        "expr": "577/408",
+        "latex": "\\sqrt{2} \\approx \\frac{577}{408}",
+        "variables": {},
+        "name": "Square-root-of-2 approximation",
+        "interpretation": "A rational approximation to the diagonal-to-side ratio of a square."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Translation from Wikipedia (Shulba Sutras)."}
+    },
+    {
+      "id": "F05",
+      "query_text": "To transform a circle into a square, the diameter is divided into eight parts; one such part, after being divided into twenty-nine parts, is reduced by twenty-eight of them and further by the sixth of the part left less the eighth of the sixth part.",
+      "query_language": "en",
+      "gloss": "Squaring-the-circle construction giving pi approximately 3.088.",
+      "source": {
+        "citation": "Baudhāyana Śulbasūtra 2.10",
+        "url": "https://en.wikipedia.org/wiki/Shulba_Sutras",
+        "license": "Public Domain"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "pi_approximation",
+        "system_key": null,
+        "expr": null,
+        "latex": "\\pi \\approx 3.088",
+        "variables": {},
+        "name": "Pi approximation (circle-square transformation)",
+        "interpretation": "A rule for squaring the circle that implies pi ~ 3.088."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Translation from Wikipedia (Shulba Sutras)."}
+    },
+    {
+      "id": "F06",
+      "query_text": "त्रिभुजस्य फलशरीरं समदलकोट्यभुजार्धसंवर्गः।",
+      "query_language": "sa",
+      "gloss": "The area of a triangle is the product of half the base and the perpendicular (height).",
+      "source": {
+        "citation": "Āryabhaṭīya, Ganitapāda verse 6",
+        "url": "https://sa.wikisource.org/wiki/ARYABHATIYA_OF_ARYABHATA",
+        "license": "Public Domain (Aryabhata, c. 499 CE)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "triangle_area",
+        "system_key": "triangle_area",
+        "expr": "b*h/2",
+        "latex": "A = \\frac{1}{2}bh",
+        "variables": {"b": "base", "h": "height", "A": "area"},
+        "name": "Area of triangle",
+        "interpretation": "Area of a triangle equals half the product of base and height."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "The Wikisource index of the critical edition lists 'त्रिभुजस्य फलशरीरं (गणित 6 a)'; Devanagari follows the standard reading."}
+    },
+    {
+      "id": "F07",
+      "query_text": "The area of a circle is equal to half the circumference multiplied by the radius.",
+      "query_language": "en",
+      "gloss": "Aryabhata's circle-area rule, equivalent to pi*r^2.",
+      "source": {
+        "citation": "Āryabhaṭīya, Ganitapāda (area of a circle)",
+        "url": "https://sa.wikisource.org/wiki/ARYABHATIYA_OF_ARYABHATA",
+        "license": "Public Domain"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "circle_area",
+        "system_key": "circle_area",
+        "expr": "pi*r**2",
+        "latex": "A = \\pi r^2",
+        "variables": {"r": "radius", "A": "area"},
+        "name": "Area of circle",
+        "interpretation": "Area of a circle is pi times the square of the radius."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Content section verified from the Wikisource table of contents; exact verse number to be confirmed by a reviewer."}
+    },
+    {
+      "id": "F08",
+      "query_text": "The sum of a series is the number of terms multiplied by half the sum of the first and last terms.",
+      "query_language": "en",
+      "gloss": "Arithmetic-series summation rule.",
+      "source": {
+        "citation": "Āryabhaṭīya, Ganitapāda (summation of series)",
+        "url": "https://sa.wikisource.org/wiki/ARYABHATIYA_OF_ARYABHATA",
+        "license": "Public Domain"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "arithmetic_sum",
+        "system_key": "arithmetic_sum",
+        "expr": "n*(a + l)/2",
+        "latex": "S = \\frac{n(a+l)}{2}",
+        "variables": {"n": "number of terms", "a": "first term", "l": "last term", "S": "sum"},
+        "name": "Arithmetic series sum",
+        "interpretation": "Sum of an arithmetic series equals n(a+l)/2."
+      },
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Standard Aryabhatan result; exact verse reference to be confirmed."}
+    },
+    {
+      "id": "F09",
+      "query_text": "समचतुरश्रस्य क्षेत्रफलं भुजवर्गः।।",
+      "query_language": "sa",
+      "gloss": "The area of a square is the square of its side.",
+      "source": {
+        "citation": "Project corpus: data/annotated/sulbasutras_sample.json (SHLOKA_250749)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "square_area",
+        "system_key": "square_area",
+        "expr": "a**2",
+        "latex": "A = a^2",
+        "variables": {"a": "side", "A": "area"},
+        "name": "Area of square",
+        "interpretation": "Area of a square equals the square of its side."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Sample passage is not a critical-edition text; interpretation asserted by the benchmark author."}
+    },
+    {
+      "id": "F10",
+      "query_text": "आयतचतुरश्रस्य क्षेत्रफलं दीर्घभुजेन ह्रस्वभुजगुणितम्।।",
+      "query_language": "sa",
+      "gloss": "The area of a rectangle is its length multiplied by its breadth.",
+      "source": {
+        "citation": "Project corpus: data/annotated/sulbasutras_sample.json (SHLOKA_250750)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "rectangle_area",
+        "system_key": null,
+        "expr": "l*b",
+        "latex": "A = l \\cdot b",
+        "variables": {"l": "length", "b": "breadth", "A": "area"},
+        "name": "Area of rectangle",
+        "interpretation": "Area of a rectangle equals length times breadth."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "The system's registry has no rectangle formula."}
+    },
+    {
+      "id": "F11",
+      "query_text": "त्रिभुजस्य क्षेत्रफलं भूमिश्चशीर्षलम्बार्धगुणितम्।।",
+      "query_language": "sa",
+      "gloss": "The area of a triangle is the base multiplied by half the altitude.",
+      "source": {
+        "citation": "Project corpus: data/annotated/sulbasutras_sample.json (SHLOKA_250751)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "triangle_area",
+        "system_key": "triangle_area",
+        "expr": "b*h/2",
+        "latex": "A = \\frac{1}{2}bh",
+        "variables": {"b": "base", "h": "height", "A": "area"},
+        "name": "Area of triangle",
+        "interpretation": "Area of a triangle equals half the base times the height."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": ""}
+    },
+    {
+      "id": "F12",
+      "query_text": "वृत्तस्य क्षेत्रफलं व्यासार्धवर्गं पाईगुणितम्।।",
+      "query_language": "sa",
+      "gloss": "The area of a circle is pi multiplied by the square of the radius.",
+      "source": {
+        "citation": "Project corpus: data/annotated/sulbasutras_sample.json (SHLOKA_250752)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "circle_area",
+        "system_key": "circle_area",
+        "expr": "pi*r**2",
+        "latex": "A = \\pi r^2",
+        "variables": {"r": "radius", "A": "area"},
+        "name": "Area of circle",
+        "interpretation": "Area of a circle equals pi times the radius squared."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": ""}
+    },
+    {
+      "id": "F13",
+      "query_text": "गोलस्य पृष्ठफलं व्यासवर्गं पाईगुणितम्।।",
+      "query_language": "sa",
+      "gloss": "The surface area of a sphere is pi multiplied by the square of the diameter.",
+      "source": {
+        "citation": "Project corpus: data/annotated/sulbasutras_sample.json (SHLOKA_250753)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "sphere_surface",
+        "system_key": null,
+        "expr": "4*pi*r**2",
+        "latex": "A = 4\\pi r^2",
+        "variables": {"r": "radius", "A": "surface area"},
+        "name": "Surface area of sphere",
+        "interpretation": "Surface area of a sphere is four pi r squared."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "The system's registry has no sphere formula."}
+    },
+    {
+      "id": "F14",
+      "query_text": "शून्यं साम्यसमुच्चये।।",
+      "query_language": "sa",
+      "gloss": "When the sum (of the coefficients) is the same, that sum is zero.",
+      "source": {
+        "citation": "Project corpus: data/annotated/vedic_mathematics_sutras.json (SHLOKA_250762)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "quadratic",
+        "system_key": "quadratic",
+        "expr": "(-b + sqrt(b**2 - 4*a*c)) / (2*a)",
+        "latex": "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}",
+        "variables": {"a": "quadratic coefficient", "b": "linear coefficient", "c": "constant", "x": "root"},
+        "name": "Quadratic formula",
+        "interpretation": "Roots of a quadratic equation ax^2+bx+c=0."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Mapping from the Sunyam-samyasamuccaye sutra to the quadratic formula is a benchmark-author interpretation and needs review."}
+    },
+    {
+      "id": "F15",
+      "query_text": "ऊर्ध्वतिर्यग्भ्याम्।।",
+      "query_language": "sa",
+      "gloss": "Vertically and crosswise — the multiplication algorithm.",
+      "source": {
+        "citation": "Project corpus: data/annotated/vedic_mathematics_sutras.json (SHLOKA_250758)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": "vedic_square",
+        "system_key": "vedic_square",
+        "expr": "(a + b)**2 - 2*a*b",
+        "latex": "(a+b)^2 - 2ab = a^2 + b^2",
+        "variables": {"a": "tens part", "b": "units part"},
+        "name": "Vedic square identity",
+        "interpretation": "Urdhva-tiryagbhyam underlies the identity (a+b)^2 = a^2 + 2ab + b^2."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Registry entry 'vedic_square' is (a+b)^2 - 2ab; the intended identity differs. Flagged for review."}
+    },
+    {
+      "id": "F16",
+      "query_text": "ग्रहाः नवसंख्याकाः सूर्यमण्डलं परिक्रामन्ति।।",
+      "query_language": "sa",
+      "gloss": "Nine planets orbit the sun.",
+      "source": {
+        "citation": "Project corpus: data/annotated/atharvaveda_sample.json (SHLOKA_002270)",
+        "url": "",
+        "license": "Project data (synthetic sample, unverified provenance)"
+      },
+      "is_mathematical": true,
+      "expected": {
+        "formula_key": null,
+        "system_key": null,
+        "expr": null,
+        "latex": null,
+        "variables": {},
+        "name": null,
+        "interpretation": "Numerical/astronomical statement; mathematical but with no formula to extract."
+      },
+      "provenance": {"level": "project_corpus", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Detection-only: contains the keyword संख्या."}
+    },
+    {
+      "id": "N01",
+      "query_text": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजम्।",
+      "query_language": "sa",
+      "gloss": "I praise Agni, the priest, the divine ministrant of the sacrifice.",
+      "source": {"citation": "Ṛgveda 1.1.1 (SHLOKA_250517)", "url": "", "license": "Public Domain"},
+      "is_mathematical": false,
+      "expected": {"formula_key": null, "system_key": null, "expr": null, "latex": null, "variables": {}, "name": null, "interpretation": "Devotional hymn; not mathematical."},
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Rigveda 1.1 opening, well attested."}
+    },
+    {
+      "id": "N02",
+      "query_text": "अग्निर्होता कविक्रतुः सत्यश्चित्रश्रवस्तमः।",
+      "query_language": "sa",
+      "gloss": "Agni, the invoker, the sage-poet, the truest, most wonderful of hearers.",
+      "source": {"citation": "Ṛgveda 1.1 (SHLOKA_250525)", "url": "", "license": "Public Domain"},
+      "is_mathematical": false,
+      "expected": {"formula_key": null, "system_key": null, "expr": null, "latex": null, "variables": {}, "name": null, "interpretation": "Devotional hymn; not mathematical."},
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": ""}
+    },
+    {
+      "id": "N03",
+      "query_text": "इन्द्रं वाणीरनूषत।।",
+      "query_language": "sa",
+      "gloss": "The hymns have praised Indra.",
+      "source": {"citation": "Ṛgveda 1.2 (SHLOKA_250528)", "url": "", "license": "Public Domain"},
+      "is_mathematical": false,
+      "expected": {"formula_key": null, "system_key": null, "expr": null, "latex": null, "variables": {}, "name": null, "interpretation": "Devotional hymn; not mathematical."},
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": ""}
+    },
+    {
+      "id": "N04",
+      "query_text": "ज्योतिषां ज्योतिरजरं तदादित्यस्तपति।",
+      "query_language": "sa",
+      "gloss": "The light of lights, the ageless; that sun burns.",
+      "source": {"citation": "Atharvaveda (SHLOKA_002266)", "url": "", "license": "Public Domain"},
+      "is_mathematical": false,
+      "expected": {"formula_key": null, "system_key": null, "expr": null, "latex": null, "variables": {}, "name": null, "interpretation": "Poetic astronomy statement, not a quantitative formula."},
+      "provenance": {"level": "needs_review", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": "Could be argued as astronomy; treated as non-mathematical for formula extraction."}
+    },
+    {
+      "id": "N05",
+      "query_text": "धृतराष्ट्र उवाच धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।",
+      "query_language": "sa",
+      "gloss": "Dhritarashtra said: assembled on the field of dharma, eager for battle.",
+      "source": {"citation": "Bhagavad Gita 1.1 (SHLOKA_002273)", "url": "", "license": "MIT (gita/gita)"},
+      "is_mathematical": false,
+      "expected": {"formula_key": null, "system_key": null, "expr": null, "latex": null, "variables": {}, "name": null, "interpretation": "Narrative verse; not mathematical."},
+      "provenance": {"level": "verified_secondary", "checked_by": "ai_candidate", "needs_reviewer": true, "notes": ""}
+    }
+  ]
+}

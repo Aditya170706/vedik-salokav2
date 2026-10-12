@@ -16,8 +16,12 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
 import torch
+
+try:
+    import seaborn as sns
+except ModuleNotFoundError:  # seaborn is only used for plot styling
+    sns = None
 from torch.cuda.amp import autocast
 from torch.utils.data import DataLoader
 from sklearn.metrics import (
@@ -176,12 +180,29 @@ def _plot_confusion_matrix(cm: np.ndarray, class_names: list, task: str, out_dir
 
     # Normalize for colour scale but annotate with raw counts
     cm_norm = cm.astype(float) / np.maximum(cm.sum(axis=1, keepdims=True), 1)
-    sns.heatmap(
-        cm_norm, annot=cm, fmt="d", cmap="YlOrRd",
-        xticklabels=class_names, yticklabels=class_names,
-        linewidths=0.5, linecolor="grey",
-        ax=ax, cbar_kws={"label": "Normalised frequency"},
-    )
+    if sns is not None:
+        sns.heatmap(
+            cm_norm, annot=cm, fmt="d", cmap="YlOrRd",
+            xticklabels=class_names, yticklabels=class_names,
+            linewidths=0.5, linecolor="grey",
+            ax=ax, cbar_kws={"label": "Normalised frequency"},
+        )
+    else:
+        # Seaborn-free fallback so evaluation runs without the optional dep.
+        im = ax.imshow(cm_norm, cmap="YlOrRd", vmin=0, vmax=1)
+        fig.colorbar(im, ax=ax, label="Normalised frequency")
+        ax.set_xticks(range(n))
+        ax.set_yticks(range(n))
+        ax.set_xticklabels(class_names)
+        ax.set_yticklabels(class_names)
+        for i in range(n):
+            for j in range(n):
+                ax.text(j, i, str(int(cm[i, j])), ha="center", va="center",
+                        fontsize=8, color="black")
+        ax.set_xticks(np.arange(-0.5, n, 1), minor=True)
+        ax.set_yticks(np.arange(-0.5, n, 1), minor=True)
+        ax.grid(which="minor", color="grey", linewidth=0.5)
+        ax.tick_params(which="minor", length=0)
     ax.set_title(f"{task.capitalize()} Classifier — Confusion Matrix", fontsize=14, pad=12)
     ax.set_xlabel("Predicted Label", fontsize=11)
     ax.set_ylabel("True Label", fontsize=11)

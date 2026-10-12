@@ -382,6 +382,162 @@
         "f1": 0.4155844155844156,
         "val_loss": 1.2792609930038452
       }
+    },
+    {
+      "version": "v20261002_035645",
+      "timestamp": "2026-10-02T04:37:22.521035+00:00",
+      "params": {
+        "task": "veda",
+        "version": "v20261002_035645",
+        "pretrained": "ai4bharat/indic-bert",
+        "num_labels": 6,
+        "classes": [
+          "Atharvaveda",
+          "Other",
+          "Rigveda",
+          "Samaveda",
+          "Unknown",
+          "Yajurveda"
+        ],
+        "epochs": 5,
+        "batch_size": 16,
+        "learning_rate": 2e-05,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 42,
+        "train_size": 24768,
+        "val_size": 5304,
+        "elapsed_sec": 2417.9
+      },
+      "metrics": {
+        "accuracy": 0.9922699849170438,
+        "precision": 0.992417171261167,
+        "recall": 0.9922699849170438,
+        "f1": 0.9923199828822149,
+        "val_loss": 0.07550074405979826
+      }
+    },
+    {
+      "version": "test_v1",
+      "timestamp": "2026-10-09T03:44:24.312585+00:00",
+      "params": {
+        "task": "veda",
+        "version": "test_v1",
+        "pretrained": "test-tiny-bert",
+        "num_labels": 3,
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ],
+        "epochs": 1,
+        "batch_size": 2,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 42,
+        "train_size": 4,
+        "val_size": 4,
+        "elapsed_sec": 1.0
+      },
+      "metrics": {
+        "accuracy": 0.75,
+        "precision": 0.625,
+        "recall": 0.75,
+        "f1": 0.6666666666666666,
+        "val_loss": 1.09814453125
+      }
+    },
+    {
+      "version": "ckpt_test",
+      "timestamp": "2026-10-09T03:44:24.684338+00:00",
+      "params": {
+        "task": "veda",
+        "version": "ckpt_test",
+        "pretrained": "test-tiny-bert",
+        "num_labels": 2,
+        "classes": [
+          "A",
+          "B"
+        ],
+        "epochs": 2,
+        "batch_size": 2,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 0,
+        "train_size": 4,
+        "val_size": 4,
+        "elapsed_sec": 0.3
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "val_loss": 0.69189453125
+      }
+    },
+    {
+      "version": "test_v1",
+      "timestamp": "2026-10-09T03:53:26.302999+00:00",
+      "params": {
+        "task": "veda",
+        "version": "test_v1",
+        "pretrained": "test-tiny-bert",
+        "num_labels": 3,
+        "classes": [
+          "A",
+          "B",
+          "C"
+        ],
+        "epochs": 1,
+        "batch_size": 2,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 42,
+        "train_size": 4,
+        "val_size": 4,
+        "elapsed_sec": 0.6
+      },
+      "metrics": {
+        "accuracy": 0.25,
+        "precision": 0.0625,
+        "recall": 0.25,
+        "f1": 0.1,
+        "val_loss": 1.09912109375
+      }
+    },
+    {
+      "version": "ckpt_test",
+      "timestamp": "2026-10-09T03:53:26.687885+00:00",
+      "params": {
+        "task": "veda",
+        "version": "ckpt_test",
+        "pretrained": "test-tiny-bert",
+        "num_labels": 2,
+        "classes": [
+          "A",
+          "B"
+        ],
+        "epochs": 2,
+        "batch_size": 2,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 0,
+        "train_size": 4,
+        "val_size": 4,
+        "elapsed_sec": 0.3
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "val_loss": 0.69189453125
+      }
     }
   ],
   "domain": [
@@ -614,6 +770,106 @@
         "f1": 0.03571428571428571,
         "val_loss": 2.096958875656128
       }
+    },
+    {
+      "version": "v20261002_035645",
+      "timestamp": "2026-10-02T05:18:20.274618+00:00",
+      "params": {
+        "task": "domain",
+        "version": "v20261002_035645",
+        "pretrained": "ai4bharat/indic-bert",
+        "num_labels": 12,
+        "classes": [
+          "Astronomy",
+          "Ayurveda",
+          "Cosmology",
+          "Ethics",
+          "Grammar",
+          "Linguistics",
+          "Mathematics",
+          "Medicine",
+          "Other",
+          "Philosophy",
+          "Ritual",
+          "Unknown"
+        ],
+        "epochs": 5,
+        "batch_size": 16,
+        "learning_rate": 2e-05,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 42,
+        "train_size": 24768,
+        "val_size": 5304,
+        "elapsed_sec": 2424.4
+      },
+      "metrics": {
+        "accuracy": 0.8412518853695324,
+        "precision": 0.8997450355140741,
+        "recall": 0.8412518853695324,
+        "f1": 0.8645774153862706,
+        "val_loss": 1.1724649848394006
+      }
+    },
+    {
+      "version": "cfg_test",
+      "timestamp": "2026-10-09T03:44:25.222657+00:00",
+      "params": {
+        "task": "domain",
+        "version": "cfg_test",
+        "pretrained": "test-tiny-bert",
+        "num_labels": 2,
+        "classes": [
+          "A",
+          "B"
+        ],
+        "epochs": 1,
+        "batch_size": 2,
+        "learning_rate": 2e-05,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 1,
+        "train_size": 4,
+        "val_size": 4,
+        "elapsed_sec": 0.4
+      },
+      "metrics": {
+        "accuracy": 0.75,
+        "precision": 0.8333333333333333,
+        "recall": 0.75,
+        "f1": 0.7333333333333334,
+        "val_loss": 0.6929931640625
+      }
+    },
+    {
+      "version": "cfg_test",
+      "timestamp": "2026-10-09T03:53:26.948722+00:00",
+      "params": {
+        "task": "domain",
+        "version": "cfg_test",
+        "pretrained": "test-tiny-bert",
+        "num_labels": 2,
+        "classes": [
+          "A",
+          "B"
+        ],
+        "epochs": 1,
+        "batch_size": 2,
+        "learning_rate": 2e-05,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 1,
+        "train_size": 4,
+        "val_size": 4,
+        "elapsed_sec": 0.1
+      },
+      "metrics": {
+        "accuracy": 0.75,
+        "precision": 0.8333333333333333,
+        "recall": 0.75,
+        "f1": 0.7333333333333334,
+        "val_loss": 0.6929931640625
+      }
     }
   ],
   "branch": [
@@ -699,6 +955,48 @@
         "recall": 0.42857142857142855,
         "f1": 0.3979591836734694,
         "val_loss": 1.8758318424224854
+      }
+    },
+    {
+      "version": "v20261002_035645",
+      "timestamp": "2026-10-02T05:59:21.089200+00:00",
+      "params": {
+        "task": "branch",
+        "version": "v20261002_035645",
+        "pretrained": "ai4bharat/indic-bert",
+        "num_labels": 14,
+        "classes": [
+          "Algebra",
+          "Arithmetic",
+          "Chandas",
+          "Combinatorics",
+          "Geometry",
+          "Jyotisha",
+          "Kalpa",
+          "Mimamsa",
+          "Number Theory",
+          "Other",
+          "Trigonometry",
+          "Unknown",
+          "Vedanta",
+          "Vyakarana"
+        ],
+        "epochs": 5,
+        "batch_size": 16,
+        "learning_rate": 2e-05,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.1,
+        "seed": 42,
+        "train_size": 24768,
+        "val_size": 5304,
+        "elapsed_sec": 2426.6
+      },
+      "metrics": {
+        "accuracy": 0.8700980392156863,
+        "precision": 0.8953571772232309,
+        "recall": 0.8700980392156863,
+        "f1": 0.8809993675282562,
+        "val_loss": 1.2054744192275657
       }
     }
   ]

@@ -222,6 +222,10 @@ class LocalKnowledgeGraph:
         else:
             self.nodes = {}  # node_type:name → properties dict
             self.edges = []  # list of {from, rel, to}
+        # Index existing edges for O(1) duplicate detection while building.
+        # Without this, `_add_edge` scans a list that grows into the millions
+        # on a full corpus and the build becomes quadratic.
+        self._edge_set = {(e["from"], e["rel"], e["to"]) for e in self.edges}
 
     def _save(self):
         with open(self.graph_path, "w", encoding="utf-8") as f:
@@ -233,9 +237,10 @@ class LocalKnowledgeGraph:
             self.nodes[node_id] = {"type": node_type, "key": key, **(properties or {})}
 
     def _add_edge(self, from_key: str, rel: str, to_key: str):
-        edge = {"from": from_key, "rel": rel, "to": to_key}
-        if edge not in self.edges:
-            self.edges.append(edge)
+        key = (from_key, rel, to_key)
+        if key not in self._edge_set:
+            self._edge_set.add(key)
+            self.edges.append({"from": from_key, "rel": rel, "to": to_key})
 
     def insert_shloka(self, shloka: dict):
         ann = shloka.get("annotation", {})

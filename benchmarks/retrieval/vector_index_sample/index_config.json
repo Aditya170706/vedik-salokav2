@@ -1,0 +1,7 @@
+{
+  "model_name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "dim": 384,
+  "num_vectors": 48,
+  "built_at": "2026-10-09T03:32:12Z",
+  "note": "benchmark-local rebuild of the fixed 48-document collection"
+}

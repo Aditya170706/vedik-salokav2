@@ -9,17 +9,51 @@ Saves to data/training/
 
 import json
 import random
+import time
 from pathlib import Path
 from typing import Optional
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from config import ANNOTATED_DIR, TRAINING_DIR, LOGS_DIR, TRAIN_RATIO, VALIDATION_RATIO, TEST_RATIO
+from config import (
+    ANNOTATED_DIR, TRAINING_DIR, LOGS_DIR,
+    TRAIN_RATIO, VALIDATION_RATIO, TEST_RATIO, MAX_SHLOKAS_PER_SOURCE,
+)
 from scripts.logger import setup_logger, JSONLogger
 
 logger = setup_logger("dataset_builder", LOGS_DIR)
 audit = JSONLogger(LOGS_DIR / "dataset_audit.jsonl")
+
+
+# ---------------------------------------------------------------------------
+# Safe file writing (handles Windows file locks, e.g. a CSV open in Excel)
+# ---------------------------------------------------------------------------
+
+def _write_csv(df, path: Path, retries: int = 3, delay: float = 1.0) -> None:
+    """
+    Write a DataFrame to CSV, retrying briefly on Windows file locks.
+
+    Windows raises PermissionError [Errno 13] when the target file is open in
+    another program (Excel, LibreOffice, an editor, backup/AV scanner). We retry
+    a few times and, if the lock persists, raise a clear, actionable error
+    instead of a bare traceback.
+    """
+    for attempt in range(1, retries + 1):
+        try:
+            df.to_csv(path, index=False, encoding="utf-8")
+            return
+        except PermissionError:
+            if attempt < retries:
+                logger.warning(
+                    f"Cannot write {path.name} (locked). Retrying {attempt}/{retries - 1}..."
+                )
+                time.sleep(delay)
+            else:
+                raise PermissionError(
+                    f"Cannot write '{path}': the file is locked by another program. "
+                    f"Close it (e.g. Excel if the CSV is open) and re-run."
+                ) from None
 
 
 # ---------------------------------------------------------------------------
@@ -69,6 +103,7 @@ def build_dataset(
     val_ratio: float = VALIDATION_RATIO,
     test_ratio: float = TEST_RATIO,
     stratify_by: Optional[str] = "domain",
+    max_per_source: Optional[int] = MAX_SHLOKAS_PER_SOURCE,
 ) -> dict:
     """
     Build train/validation/test CSV splits from annotated shlokas.
@@ -81,6 +116,7 @@ def build_dataset(
         val_ratio: Fraction for validation set
         test_ratio: Fraction for test set
         stratify_by: Field to stratify split on (None for random split)
+        max_per_source: Cap rows taken from any single source (None/0 = no cap)
 
     Returns:
         Dict with split sizes and file paths
@@ -113,6 +149,20 @@ def build_dataset(
     # Flatten
     rows = [flatten_shloka(s) for s in all_shlokas]
     df = pd.DataFrame(rows)
+
+    # Rebalance: cap how many rows any single source contributes so a large
+    # corpus (Ramayana + Mahabharata) can't drown out the smaller sources.
+    if max_per_source and "source" in df.columns:
+        before = len(df)
+        df = pd.concat(
+            g.sample(n=min(len(g), max_per_source), random_state=seed)
+            for _, g in df.groupby("source")
+        ).reset_index(drop=True)
+        if len(df) < before:
+            logger.info(
+                f"Rebalanced sources: {before:,} → {len(df):,} shlokas "
+                f"(max {max_per_source:,}/source)"
+            )
 
     # Shuffle
     df = df.sample(frac=1, random_state=seed).reset_index(drop=True)
@@ -151,9 +201,9 @@ def build_dataset(
     val_path = output_dir / "validation.csv"
     test_path = output_dir / "test.csv"
 
-    train_df.to_csv(train_path, index=False, encoding="utf-8")
-    val_df.to_csv(val_path, index=False, encoding="utf-8")
-    test_df.to_csv(test_path, index=False, encoding="utf-8")
+    _write_csv(train_df, train_path)
+    _write_csv(val_df, val_path)
+    _write_csv(test_df, test_path)
 
     result = {
         "total": len(df),
@@ -218,6 +268,10 @@ if __name__ == "__main__":
     parser.add_argument("--output-dir", default=None)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--no-stratify", action="store_true")
+    parser.add_argument(
+        "--max-per-source", type=int, default=MAX_SHLOKAS_PER_SOURCE,
+        help="Cap shlokas taken from any single source (0 disables the cap)",
+    )
     args = parser.parse_args()
 
     result = build_dataset(
@@ -225,6 +279,7 @@ if __name__ == "__main__":
         output_dir=args.output_dir,
         seed=args.seed,
         stratify_by=None if args.no_stratify else "domain",
+        max_per_source=args.max_per_source or None,
     )
     print(json.dumps(result, indent=2))
 

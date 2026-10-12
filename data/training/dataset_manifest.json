@@ -1,15 +1,15 @@
 {
-  "total": 48,
+  "total": 35384,
   "train": {
-    "count": 31,
+    "count": 24768,
     "path": "D:\\vedic_shlokaphase4\\vedic_shloka_system\\data\\training\\train.csv"
   },
   "validation": {
-    "count": 7,
+    "count": 5304,
     "path": "D:\\vedic_shlokaphase4\\vedic_shloka_system\\data\\training\\validation.csv"
   },
   "test": {
-    "count": 10,
+    "count": 5312,
     "path": "D:\\vedic_shlokaphase4\\vedic_shloka_system\\data\\training\\test.csv"
   },
   "columns": [

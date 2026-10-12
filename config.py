@@ -42,6 +42,12 @@ TRAIN_RATIO = 0.70
 VALIDATION_RATIO = 0.15
 TEST_RATIO = 0.15
 
+# Cap on the number of shlokas taken from any single source when building the
+# dataset. Prevents one huge corpus (e.g. Ramayana + Mahabharata, ~217k shlokas)
+# from drowning out the smaller scientific/technical sources. Set to 0/None to
+# disable and use every shloka.
+MAX_SHLOKAS_PER_SOURCE = 10000
+
 # Shloka segmentation markers
 SHLOKA_MARKERS = ["।", "॥"]
 
